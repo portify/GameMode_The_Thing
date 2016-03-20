@@ -7,7 +7,7 @@ package TheThingGamePackage
 		if (isObject(%obj.client))
 		{
 			%obj.client.stopViewingInventory();
-			if (%obj.client.inDefaultGame() && isObject(GameRoundCleanup))
+			if (%obj.client.miniGame == $DefaultMiniGame && isObject(GameRoundCleanup))
 			{
 				%obj.inhibitRemoveBody = true;
 				GameRoundCleanup.add(%obj);
@@ -45,6 +45,8 @@ package TheThingGamePackage
 				%player.tempBrick = 0;
 			}
 			%player.isBody = true;
+			%player.PlayerName = %client.getPlayerName();
+			%player.appearance = %client.getAppearance();
 			%player.client = 0;
 		}
 		else
@@ -97,7 +99,7 @@ package TheThingGamePackage
 		// removed %message and %sourceClientName arguments
 		messageClient(%client, 'MsgYourDeath', '', %clientName, '', '');//%client.miniGame.respawnTime);
 
-		commandToClient(%client, 'CenterPrint', '', 1);
+		commandToClient(%client, 'CenterPrint', "", 1);
 		%client.miniGame.checkLastManStanding();
 	}
 
@@ -123,7 +125,8 @@ package TheThingGamePackage
 		{
 			%member = %this.member[%i];
 			%player = %member.player;
-
+			%player.setShapeNameDistance(12.5);
+			%player.setShapeNameColor("1 1 1 1");
 			if (%member != %thingClient)
 			{
 				messageClient(%member, '', "\c5You are a human this round. Eliminate The Thing to win!");
@@ -136,7 +139,10 @@ package TheThingGamePackage
 			else
 			{
 				messageClient(%member, '', "\c0You are be The Thing this round! Absorb all the humans to win!");
+				messageClient(%member, '', "\c0Press your JET key on the corpses of your victims to absorb them.");
 				%player.addTool(Colt1911Item);
+				%player.tool[2] = armbladeItem.getID();
+				messageClient(%member, 'MsgItemPickup', '', 2, armbladeItem.getID());
 			}
 		}
 
