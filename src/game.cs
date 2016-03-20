@@ -32,6 +32,7 @@ package TheThingGamePackage
       else
       {
         messageClient(%member, '', "\c0You are be The Thing this round! Absorb all the humans to win!");
+        %player.addTool(Colt1911Item);
       }
     }
 
@@ -43,13 +44,20 @@ package TheThingGamePackage
     %itemPool[%maxItemPool++] = "0";
     %itemPool[%maxItemPool++] = "Colt1911Item";
     %itemPool[%maxItemPool++] = "M1GarandItem";
-    %itemPool[%maxItemPool++] = "M24RifleItem";
+    %itemPool[%maxItemPool++] = "ColtWalkerItem";
     %itemPool[%maxItemPool++] = "Remington870Item";
     %itemPool[%maxItemPool++] = "RevolverItem";
     %itemPool[%maxItemPool++] = "ThompsonItem";
+    %itemPool[%maxItemPool++] = "MicroUziItem";
 
     %ammoPool[%maxAmmoPool++] = "0";
     %ammoPool[%maxAmmoPool++] = "MagazineItem_45ACP_x7";
+    %ammoPool[%maxAmmoPool++] = "Bullet357PackItem";
+    %ammoPool[%maxAmmoPool++] = "BulletBuckshotPackItem";
+    %ammoPool[%maxAmmoPool++] = "MagazineItem_45ACP_x20_SMG";
+    %ammoPool[%maxAmmoPool++] = "MagazineItem_3006_x8";
+    %ammoPool[%maxAmmoPool++] = "MagazineItem_MicroUzi";
+    %ammoPool[%maxAmmoPool++] = "MagazineItem_MicroUziExtended";
 
     for (%i = 0; %i < %group.NTObjectCount["_itemSpawn"]; %i++)
     {
